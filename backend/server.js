@@ -10,7 +10,7 @@ import trainerRoutes from "./routes/trainerRoutes.js"; // Add the missing semico
 
 import cors from "cors";
 
-const port = process.env.PORT ;
+const port = process.env.PORT || 5000;
 connectDB();
 const app = express();
 

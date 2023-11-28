@@ -14,7 +14,7 @@ const port = process.env.PORT || 5000;
 connectDB();
 const app = express();
 
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(cors({ origin: "https://thomasjoseph.online", credentials: true }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -37,8 +37,7 @@ import { Server } from "socket.io";
 const io = new Server(server, {
   pingTimeout: 60000,
   cors: {
-    // origin: ["https://stayfit.online","https://www.stayfit.online"],
-    origin: "http://localhost:3000",
+    origin: ["https://thomasjoseph.online","https://www.thomasjoseph.online"]
   },
 });
 
@@ -56,15 +55,6 @@ io.on("connection", (socket) => {
 
   socket.on("typing", (room) => socket.in(room).emit("typing"));
   socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));
-
-  // socket.on("uservideoCall", ({ to, offer }) => {
-  //   io.to(to).emit("incoming:call", { from: socket.id, offer });
-  // });
-
-  // socket.on('videoCall',(roomId)=>{
-  //    const room=roomId;
-     
-  // })
 
   socket.on("new message", (newMessageReceived) => {
     var chat = newMessageReceived.room;

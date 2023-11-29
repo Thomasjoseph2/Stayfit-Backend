@@ -56,6 +56,7 @@ const getTrainers = asyncHandler(async (req, res) => {
 });
 
 const blockUser = asyncHandler(async (req, res) => {
+  
   const userId = new ObjectId(req.body.userIdToConfirm);
 
   const blocked = await AdminServices.blockUser(userId);

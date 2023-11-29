@@ -46,7 +46,7 @@ router.post("/block-trainer",protectAdmin, blockTrainer)
 
 router.post("/unblock-trainer",protectAdmin, unBlockTrainer);
 
-router.get("/users",protectAdmin,  users);
+router.get("/users",protectAdmin,users);
 
 router.post("/add-trainer",protectAdmin, upload.single("profileImage"), addTrainer);
 

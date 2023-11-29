@@ -45,12 +45,11 @@ io.on("connection", (socket) => {
   socket.on("setup", (userData) => {
     socket.join(userData._id);
     socket.emit("connected");
-    console.log("user joined", userData._id);
+
   });
 
   socket.on("join chat", (room) => {
     socket.join(room);
-    console.log("userjoined room", room);
   });
 
   socket.on("typing", (room) => socket.in(room).emit("typing"));

@@ -1,27 +1,22 @@
 name: Deploy to EC2
-
 on:
   push:
     branches:
       - main
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-
       - name: Generate SSH key and Deploy
         run: |
           echo "${{ secrets.AWS_PRIVATE_KEY }}" > ~/secret.pem
           chmod 600 ~/secret.pem
-          ssh -o StrictHostKeyChecking=no -i "~/secret.pem" ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_HOST }} '   
+          ssh -o StrictHostKeyChecking=no -i "~/secret.pem" ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_HOST }} '
             pm2 stop all
             cd Stayfit-Backend 
             git fetch 
             git reset --hard origin/main
-            pm2 restart all
-            exit
-          '
+            pm2 restart all'
+

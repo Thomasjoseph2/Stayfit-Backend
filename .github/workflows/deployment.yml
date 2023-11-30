@@ -1,25 +1,23 @@
-name: Deploying To Production
-
+name: Deploy to EC2
 on:
   push:
-    branches: [main]
-
+    branches:
+      - master
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Generate SSH key
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Generate SSH key and Deploy
         run: |
           echo "${{ secrets.AWS_PRIVATE_KEY }}" > ~/secret.pem
           chmod 600 ~/secret.pem
-      - name: Add EC2 host to known hosts
-        run: |
-          ssh-keyscan -H -p 22 ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
-      - name: SSH into EC2 instance and restarting server
-        run: |
-          ssh -i "~/secret.pem" ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} '
+          ssh -o StrictHostKeyChecking=no -i "~/secret.pem" ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_HOST }} '   
             pm2 stop all
             cd Stayfit-Backend 
             git fetch 
             git reset --hard origin/main
-            pm2 restart all'
+            pm2 restart all
+            exit
+          '

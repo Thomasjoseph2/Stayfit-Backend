@@ -8,16 +8,15 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: SSH into AWS EC2
-        uses: appleboy/ssh-action@v0.1.2
-        with:
-          host: ${{ secrets.AWS_HOST }}
-          username: ${{ secrets.AWS_USERNAME }}
-          key: ${{ secrets.AWS_PRIVATE_KEY }}
-          port: ${{ secrets.AWS_PORT }}
-          script: |
+      - name: Generate SSH key
+        run: |
+          echo "${{ secrets.AWS_PRIVATE_KEY }}" > ~/secret.pem
+          chmod 600 ~/secret.pem
+      - name: SSH into EC2 instance and restarting server
+        run: |
+          ssh -i "~/secret.pem" ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_HOST }} '
             pm2 stop all
             cd Stayfit-Backend 
             git fetch 
             git reset --hard origin/main
-            pm2 restart all
+            pm2 restart all'

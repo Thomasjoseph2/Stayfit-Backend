@@ -117,6 +117,8 @@ class UserService {
     
     const googleClient = new OAuth2Client(process.env.GOOGLE_KEY);
 
+    console.log(googleClient,'googleclient');
+
     const ticket = await googleClient.verifyIdToken({
       idToken: token,
 

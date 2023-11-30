@@ -12,7 +12,12 @@ jobs:
         run: |
           echo "${{ secrets.AWS_PRIVATE_KEY }}" > ~/secret.pem
           chmod 600 ~/secret.pem
-          ssh -i "~/secret.pem" ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_HOST }} '
+      - name: Add EC2 host to known hosts
+        run: |
+          ssh-keyscan -H -p 22 ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+      - name: SSH into EC2 instance and restarting server
+        run: |
+          ssh -i "~/secret.pem" ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} '
             pm2 stop all
             cd Stayfit-Backend 
             git fetch 

@@ -14,6 +14,7 @@ jobs:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USERNAME }}
           key: ${{ secrets.AWS_PRIVATE_KEY }}
+          port: ${{ secrets.AWS_PORT }}
           script: |
             pm2 stop all
             cd Stayfit-Backend 

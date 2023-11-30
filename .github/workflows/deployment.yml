@@ -1,14 +1,18 @@
 name: Deploy to EC2
+
 on:
   push:
     branches:
-      - master
+      - main
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+
       - name: Generate SSH key and Deploy
         run: |
           echo "${{ secrets.AWS_PRIVATE_KEY }}" > ~/secret.pem

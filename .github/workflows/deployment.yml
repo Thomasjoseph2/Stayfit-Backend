@@ -12,8 +12,6 @@ jobs:
         run: |
           echo "${{ secrets.AWS_PRIVATE_KEY }}" > ~/secret.pem
           chmod 600 ~/secret.pem
-      - name: SSH into EC2 instance and restarting server
-        run: |
           ssh -i "~/secret.pem" ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_HOST }} '
             pm2 stop all
             cd Stayfit-Backend 

@@ -25,6 +25,10 @@ app.use("/api/trainer", trainerRoutes); // Add the forward slash before api/trai
 
 app.get("/", (req, res) => res.send("server is ready"));
 
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'success', message: 'Health check passed' });
+});
+
 app.use(notFound);
 app.use(errorHandler);
 
@@ -37,7 +41,7 @@ import { Server } from "socket.io";
 const io = new Server(server, {
   pingTimeout: 60000,
   cors: {
-    origin: ["https://thomasjoseph.online","https://www.thomasjoseph.online"]
+    origin: ["https://thomasjoseph.online", "https://www.thomasjoseph.online"],
   },
 });
 
@@ -45,7 +49,6 @@ io.on("connection", (socket) => {
   socket.on("setup", (userData) => {
     socket.join(userData._id);
     socket.emit("connected");
-
   });
 
   socket.on("join chat", (room) => {
@@ -74,3 +77,5 @@ io.on("connection", (socket) => {
     socket.leave(userData._id);
   });
 });
+
+export  {app,io};

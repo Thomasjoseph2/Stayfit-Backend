@@ -114,12 +114,15 @@ class UserService {
   };
 
   googleLogin = asyncHandler(async (token, res) => {
+
+    console.log(token,'token');
     
     const googleClient = new OAuth2Client(process.env.GOOGLE_KEY);
 
     console.log(googleClient,'googleclient');
 
     const ticket = await googleClient.verifyIdToken({
+
       idToken: token,
 
       audience: process.env.GOOGLE_KEY,
@@ -132,6 +135,8 @@ class UserService {
     const email = payload.email;
 
     const userExists = await UserRepository.findByEmail({ email });
+     
+    console.log(userExists,'google');
 
     if (userExists !== null) {
       generateToken(res, userExists._id);
@@ -161,6 +166,8 @@ class UserService {
       };
     } else {
       const user = await UserRepository.createUser({ name, email });
+      console.log('user',user);
+
 
       if (user) {
         generateToken(res, user._id);

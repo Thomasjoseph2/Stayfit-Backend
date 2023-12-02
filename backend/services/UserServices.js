@@ -13,7 +13,6 @@ import deletes3Obj from "../utils/deletes3Obj.js";
 import instance from "../utils/instance.js";
 import crypto from "crypto";
 import util from "util";
-
 class UserService {
   static instance;
 
@@ -114,15 +113,10 @@ class UserService {
   };
 
   googleLogin = asyncHandler(async (token, res) => {
-
-    console.log(process.env.GOOGLE_KEY);
     
-    const googleClient = await  new OAuth2Client(process.env.GOOGLE_KEY);
-
-    console.log(googleClient,'googleclient');
+    const googleClient = new OAuth2Client(process.env.GOOGLE_KEY);
 
     const ticket = await googleClient.verifyIdToken({
-
       idToken: token,
 
       audience: process.env.GOOGLE_KEY,
@@ -135,7 +129,6 @@ class UserService {
     const email = payload.email;
 
     const userExists = await UserRepository.findByEmail({ email });
-    
 
     if (userExists !== null) {
       generateToken(res, userExists._id);
@@ -166,7 +159,6 @@ class UserService {
     } else {
       const user = await UserRepository.createUser({ name, email });
 
-
       if (user) {
         generateToken(res, user._id);
 
@@ -188,7 +180,6 @@ class UserService {
       }
     }
   });
-
   getTrainers = asyncHandler(async () => {
     const trainers = await UserRepository.getTrainers();
 

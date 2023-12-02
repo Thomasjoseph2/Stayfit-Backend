@@ -318,6 +318,17 @@ class AdminServices {
       return { statusCode: 200, lives };
     }
   });
+
+  getCustomRangeData = asyncHandler(async (startDate, endDate) => {
+    const data = await AdminRepository.getCustomRangeData(startDate, endDate);
+    if (data) {
+      
+      return { statusCode: 200, sales:data };
+    } else {
+      throw new Error("data not found");
+    }
+  });
+  
 }
 
 export default new AdminServices();

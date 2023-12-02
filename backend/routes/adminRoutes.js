@@ -25,7 +25,8 @@ import {
   unlistPlans,
   activatePlan,
   getSales,
-  getAdminConferences
+  getAdminConferences,
+  getCustomRangeData
 } from "../controllers/adminController.js";
 
 
@@ -78,6 +79,7 @@ router.get('/get-sales',protectAdmin,getSales)
 
 router.get('/get-admin-conferences',protectAdmin,getAdminConferences)
 
+router.post('/custom-date-data',protectAdmin,getCustomRangeData)
 
 // router.route('/profile').get(protect,profile).put(protect,upload.single('file'),updateUserProfile);
 

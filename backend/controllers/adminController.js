@@ -259,6 +259,13 @@ const getAdminConferences = asyncHandler(async (req, res) => {
 
   res.status(response.statusCode).json(response.lives);
 });
+const getCustomRangeData=asyncHandler(async(req,res)=>{
+  const { startDate,endDate}=req.body
+  const data=await AdminServices.getCustomRangeData(startDate,endDate)
+  console.log(data);
+  res.status(data.statusCode).json( {customSales:data.sales.data[0].totalCustomSales});
+
+})
 export {
   authAdmin,
   logoutAdmin,
@@ -281,5 +288,6 @@ export {
   unlistPlans,
   getSales,
   activatePlan,
-  getAdminConferences
+  getAdminConferences,
+  getCustomRangeData
 };

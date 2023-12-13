@@ -33,8 +33,6 @@ const registerUser = asyncHandler(async (req, res) => {
 
 const googleLogin = asyncHandler(async (req, res) => {
 
-  console.log(req.body);
-
   const { token } = req.body;
 
   const result = await UserServices.googleLogin(token, res);

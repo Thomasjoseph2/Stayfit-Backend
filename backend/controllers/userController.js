@@ -34,11 +34,8 @@ const registerUser = asyncHandler(async (req, res) => {
 const googleLogin = asyncHandler(async (req, res) => {
 
   const { token } = req.body;
-  console.log('result form google login');
 
   const result = await UserServices.googleLogin(token, res);
-
-  console.log(result,'result form google login');
 
   res.status(result.statusCode).json(result.data);
 });

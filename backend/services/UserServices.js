@@ -113,8 +113,7 @@ class UserService {
   };
 
   googleLogin = asyncHandler(async (token, res) => {
-    
-try{    const googleClient = new OAuth2Client(process.env.GOOGLE_KEY);
+    const googleClient = new OAuth2Client(process.env.GOOGLE_KEY);
 
     const ticket = await googleClient.verifyIdToken({
       idToken: token,
@@ -138,9 +137,7 @@ try{    const googleClient = new OAuth2Client(process.env.GOOGLE_KEY);
       if (userExists.imagePath) {
         image = await generateUrl(userExists.imagePath);
       }
-      console.log('userexists',userExists);
 
-   
       return {
         statusCode: 201,
 
@@ -159,7 +156,7 @@ try{    const googleClient = new OAuth2Client(process.env.GOOGLE_KEY);
         },
       };
     } else {
-      console.log('registration');
+      console.log("registration");
       const user = await UserRepository.createUser({ name, email });
 
       if (user) {
@@ -181,8 +178,6 @@ try{    const googleClient = new OAuth2Client(process.env.GOOGLE_KEY);
       } else {
         return { statusCode: 400, data: { message: "Cannot create user" } };
       }
-    }}catch(err){
-      console.log(err,'dkj;lln;n;');
     }
   });
   getTrainers = asyncHandler(async () => {
@@ -404,7 +399,7 @@ try{    const googleClient = new OAuth2Client(process.env.GOOGLE_KEY);
   });
 
   verifyPayment = asyncHandler(async (data) => {
-    console.log('hreredtydhj');
+    console.log("hreredtydhj");
     const {
       razorpay_order_id,
 
@@ -430,14 +425,18 @@ try{    const googleClient = new OAuth2Client(process.env.GOOGLE_KEY);
     if (generated_signature === razorpay_signature) {
       await UserRepository.addPayment(data);
 
-     const user= await UserRepository.addSubscription(userId, plan, duration);
+      const user = await UserRepository.addSubscription(userId, plan, duration);
 
-     console.log(user);
+      console.log(user);
 
       return {
         statusCode: 200,
 
-        data: { success: true, message: "Payment verified successfully",user:user },
+        data: {
+          success: true,
+          message: "Payment verified successfully",
+          user: user,
+        },
       };
     } else {
       return {

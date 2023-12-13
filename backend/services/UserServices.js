@@ -113,8 +113,6 @@ class UserService {
   };
 
   googleLogin = asyncHandler(async (token, res) => {
-
-    console.log('here');
     
     const googleClient = new OAuth2Client(process.env.GOOGLE_KEY);
 
@@ -126,15 +124,11 @@ class UserService {
 
     const payload = ticket.getPayload();
 
-    console.log(payload,'idsthfagaw');
-
     const name = payload.name;
 
     const email = payload.email;
 
     const userExists = await UserRepository.findByEmail({ email });
-
-    console.log(userExists,'user');
 
     if (userExists !== null) {
       generateToken(res, userExists._id);
@@ -142,7 +136,7 @@ class UserService {
       let image;
 
       if (userExists.imagePath) {
-        image = await generateUrl(user.imagePath);
+        image = await generateUrl(userExists.imagePath);
       }
 
       return {

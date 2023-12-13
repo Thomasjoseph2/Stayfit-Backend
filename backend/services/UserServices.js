@@ -114,7 +114,7 @@ class UserService {
 
   googleLogin = asyncHandler(async (token, res) => {
     
-    const googleClient = new OAuth2Client(process.env.GOOGLE_KEY);
+try{    const googleClient = new OAuth2Client(process.env.GOOGLE_KEY);
 
     const ticket = await googleClient.verifyIdToken({
       idToken: token,
@@ -181,6 +181,8 @@ class UserService {
       } else {
         return { statusCode: 400, data: { message: "Cannot create user" } };
       }
+    }}catch(err){
+      console.log(err,'dkj;lln;n;');
     }
   });
   getTrainers = asyncHandler(async () => {

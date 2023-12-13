@@ -129,7 +129,7 @@ const deletePost = asyncHandler(async (req, res) => {
   const response = await TrainerServices.deletePost(
     req.body.selectedPostId,
     req.body.trainer,
-    req.body.name
+    req.body.imageName
   );
 
   if (response) {

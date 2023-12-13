@@ -5,6 +5,7 @@ import generateUrl from "../utils/generateUrl.js";
 
 const createRoom = asyncHandler(async (req, res) => {
   try {
+    
     const { userId, trainerId } = req.body;
 
     let chatRoom = await ChatRoom.findOne({

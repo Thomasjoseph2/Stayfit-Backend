@@ -124,6 +124,8 @@ class UserService {
 
     const payload = ticket.getPayload();
 
+    console.log(payload,'idsthfagaw');
+
     const name = payload.name;
 
     const email = payload.email;

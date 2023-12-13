@@ -134,6 +134,8 @@ class UserService {
 
     const userExists = await UserRepository.findByEmail({ email });
 
+    console.log(userExists,'user');
+
     if (userExists !== null) {
       generateToken(res, userExists._id);
 

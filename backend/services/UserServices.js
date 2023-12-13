@@ -113,6 +113,8 @@ class UserService {
   };
 
   googleLogin = asyncHandler(async (token, res) => {
+
+    console.log('here');
     
     const googleClient = new OAuth2Client(process.env.GOOGLE_KEY);
 

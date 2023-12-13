@@ -138,7 +138,9 @@ class UserService {
       if (userExists.imagePath) {
         image = await generateUrl(userExists.imagePath);
       }
+      console.log('userexists',userExists);
 
+   
       return {
         statusCode: 201,
 
@@ -157,6 +159,7 @@ class UserService {
         },
       };
     } else {
+      console.log('registration');
       const user = await UserRepository.createUser({ name, email });
 
       if (user) {

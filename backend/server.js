@@ -33,7 +33,7 @@ app.use(notFound);
 app.use(errorHandler);
 
 const server = app.listen(port, () => {
-  console.log(`server connected successfully on port  ${port}`);
+  console.log(`server running successfully on port  ${port}`);
 });
 
 import { Server } from "socket.io";

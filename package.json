@@ -13,7 +13,7 @@
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "devDependencies": { 
     "@babel/core": "^7.23.5",
     "@babel/preset-env": "^7.23.5",
     "concurrently": "^8.2.1",

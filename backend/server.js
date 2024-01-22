@@ -29,6 +29,8 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'success', message: 'Health check passed' });
 });
 
+
+
 app.use(notFound);
 app.use(errorHandler);
 

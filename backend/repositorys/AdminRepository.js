@@ -76,7 +76,7 @@ class AdminRepository {
     return await Videos.find({});
   }
   async getDiets() {
-    return await Diet.find({});
+    return await Diet.find({}).sort({ _id: -1 });
   }
 
   async approveVideo(trainerId, videoId) {

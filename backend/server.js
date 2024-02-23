@@ -7,7 +7,6 @@ import connectDB from "./config/db.js";
 import cookieParser from "cookie-parser";
 import adminRoutes from "./routes/adminRoutes.js";
 import trainerRoutes from "./routes/trainerRoutes.js"; // Add the missing semicolon here
-
 import cors from "cors";
 
 const port = process.env.PORT || 5000;

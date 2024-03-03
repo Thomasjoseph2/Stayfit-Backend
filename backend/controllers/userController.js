@@ -37,6 +37,8 @@ const googleLogin = asyncHandler(async (req, res) => {
 
   const result = await UserServices.googleLogin(token, res);
 
+  console.log(result);
+
   res.status(result.statusCode).json(result.data);
 });
 //@user logout

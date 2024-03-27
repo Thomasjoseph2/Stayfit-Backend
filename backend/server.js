@@ -13,7 +13,7 @@ const port = process.env.PORT || 5000;
 connectDB();
 const app = express();
 
-app.use(cors({ origin: "https://thomasjoseph.online", credentials: true }));
+app.use(cors({ origin: "https://stayfit-front-end-indol.vercel.app", credentials: true }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

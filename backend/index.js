@@ -13,7 +13,8 @@ const port = process.env.PORT || 5000;
 connectDB();
 const app = express();
 
-app.use(cors({ origin: "stayfitfrontend-thomas-josephs-projects.vercel.app/", credentials: true }));
+app.use(cors({ origin: "https://stayfitfrontend-thomas-josephs-projects.vercel.app/", credentials: true }));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -42,7 +43,7 @@ import { Server } from "socket.io";
 const io = new Server(server, {
   pingTimeout: 60000,
   cors: {
-    origin: ["stayfitfrontend-thomas-josephs-projects.vercel.app/"],
+    origin: ["https://stayfitfrontend-thomas-josephs-projects.vercel.app/"],
   },
 });
 

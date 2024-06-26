@@ -79,4 +79,5 @@ io.on("connection", (socket) => {
   });
 });
 
-export  {app,io};
+export  default app;
+export {io};
